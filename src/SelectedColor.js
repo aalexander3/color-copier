@@ -1,7 +1,10 @@
 const SelectedColor = () => {
   let selectedColor;
+  let brightness;
 
-  const selector = (color) => {
+  const selector = (color, lightness) => {
+    console.log(lightness);
+    brightness = lightness
     selectedColor = color;
     let selectColor = document.querySelector(".selected-color")
     let colorName = document.querySelector(".color-name")

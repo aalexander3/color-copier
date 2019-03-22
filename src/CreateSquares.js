@@ -1,3 +1,5 @@
+import { convertToHex } from './ColorConverter'
+
 const CreateSquares = () => {
   let currentRed = 0
   let currentGreen = 0
@@ -5,15 +7,9 @@ const CreateSquares = () => {
   let lightness = 0
   // working with about 2060 colors
 
-  const convertToHex = num => {
-    if (num < 16){
-      return "0" + (num).toString(16)
-    }
-    return (num).toString(16)
-  }
-
   const createSquares = (parent) => {
     let div = document.createElement('div')
+    div.dataset.lightness = lightness
     div.className = "one-pixel"
     div.style.backgroundColor = `#${convertToHex(currentRed)}${convertToHex(currentGreen)}${convertToHex(currentBlue)}`
     parent.appendChild(div)
@@ -73,7 +69,8 @@ const CreateSquares = () => {
 
   return {
     createSquares,
-    fillWebPage
+    fillWebPage,
+    lightness
   }
 }
 

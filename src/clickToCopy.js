@@ -1,5 +1,6 @@
 import SelectedColor from './SelectedColor'
 import CopyPopover from './CopyPopover'
+import { rgbToHex } from './ColorConverter'
 
 const clickToCopy = async() => {
   let copied;
@@ -14,9 +15,10 @@ const clickToCopy = async() => {
         let green = rgbToHex(text[2])
         let blue = rgbToHex(text[3])
         let selectColor = `#${red}${green}${blue}`
+        let brightness = e.target.dataset.lightness
 
         copied = copyText(selectColor)
-        SelectedColor.selector(selectColor)
+        SelectedColor.selector(selectColor, brightness)
         CopyPopover.makePopover(e.clientX - 33, e.clientY - 50)
       }
     }
@@ -27,15 +29,7 @@ const clickToCopy = async() => {
     let copier = await navigator.clipboard.writeText(text)
     return copier
   }
-
-  const rgbToHex = (color) => {
-    let hex = Number(color).toString(16)
-    if (hex.length < 2) {
-      hex = "0" + hex
-    }
-    return hex
-  }
-
+  
   document.addEventListener('click', copyIt)
 }
 
